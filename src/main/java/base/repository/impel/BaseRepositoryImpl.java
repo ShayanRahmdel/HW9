@@ -17,7 +17,7 @@ public abstract class  BaseRepositoryImpl<ID extends Serializable,TYPE extends B
     }
     @Override
     public void save(TYPE entity) throws SQLException {
-        String sql =  "INSERT INTO " + getTableName() + " " + getColumnName() + " VALUES " + getCountQuestionMarkForParams(); ;
+        String sql =  "INSERT INTO " + getTableName() + " " + getColumnName() + " VALUES " + getCountQuestionMarkForParams();
         PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         fillParamForStatement(preparedStatement, entity, false);
         preparedStatement.executeUpdate();
@@ -76,15 +76,21 @@ public abstract class  BaseRepositoryImpl<ID extends Serializable,TYPE extends B
 
     }
 
+//    private void printEntities(List<TYPE> entities) {
+//        for (TYPE entity : entities) {
+//            System.out.println(entity.toString());
+//        }
+//    }
+
     public abstract String getTableName();
 
     protected abstract String getCountQuestionMarkForParams();
 
     protected abstract String getColumnName();
 
-    protected abstract void fillParamForStatement(PreparedStatement preparedStatement, TYPE entity, boolean b);
+    protected abstract void fillParamForStatement(PreparedStatement preparedStatement, TYPE entity, boolean b) throws SQLException;
 
-    protected abstract TYPE mapResultSetToEntity(ResultSet resultSet);
+    protected abstract TYPE mapResultSetToEntity(ResultSet resultSet) throws SQLException;
 
     protected abstract String getUpdateQueryParams();
 }
