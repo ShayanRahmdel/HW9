@@ -56,10 +56,14 @@ public class User extends BaseEntity<Integer> {
     }
 
 
-
-
-
-
+    public User(Integer integer, String firstName, String lastName, String userName, String password, String address) {
+        super(integer);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.address = address;
+    }
 
     public User(String firstName, String lastName, String userName, String password, String address) {
         this.firstName = firstName;
@@ -71,5 +75,16 @@ public class User extends BaseEntity<Integer> {
     }
 
     public User() {
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }
