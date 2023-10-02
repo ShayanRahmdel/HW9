@@ -1,4 +1,12 @@
 package service;
 
-public class UserService {
+import base.service.BaseService;
+import entity.User;
+
+import java.sql.SQLException;
+
+public interface UserService extends BaseService<Integer, User> {
+
+
+    void findByUserNameAndPassword(String userName,String password) throws SQLException;
 }
