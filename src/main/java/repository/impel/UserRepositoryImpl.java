@@ -34,7 +34,7 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<Integer, User> implem
 
     @Override
     protected String getColumnName() {
-        return "(firstName,lastName,userName,password,address)";
+        return "(firstName,lastName,userName,password,postalcode)";
     }
 
     @Override
@@ -43,7 +43,7 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<Integer, User> implem
         preparedStatement.setString(2,entity.getLastName());
         preparedStatement.setString(3,entity.getUserName());
         preparedStatement.setString(4,entity.getPassword());
-        preparedStatement.setString(5,entity.getAddress());
+        preparedStatement.setString(5,entity.getPostalCode());
     }
 
 
@@ -62,7 +62,7 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<Integer, User> implem
 
     @Override
     protected String getUpdateQueryParams() {
-        return "firstName=?,lastName=?,userName=?,password=?,address=?";
+        return "firstName=?,lastName=?,userName=?,password=?,postalcode=?";
     }
 
     @Override
@@ -77,5 +77,18 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<Integer, User> implem
             return mapResultSetToEntity(resultSet);
         }
         return null;
+    }
+
+    @Override
+    public String findByUserName(String userName) throws SQLException {
+        String sql = "SELECT userName FROM user_app WHERE username=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, userName);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getString("userName");
+        } else {
+            return null;
+        }
     }
 }
