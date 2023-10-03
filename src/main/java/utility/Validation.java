@@ -8,4 +8,19 @@ public class Validation {
         return password.matches(pattern.pattern());
     }
 
+    public static Boolean isValidUserName(String userName){
+        Pattern pattern = Pattern.compile("^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$");
+        return userName.matches(pattern.pattern());
+    }
+
+    public static Boolean isValidName(String name){
+        Pattern pattern = Pattern.compile("^[A-Z][a-zA-Z '.-]*[A-Za-z][^-]$");
+        return name.matches(pattern.pattern());
+    }
+
+    public static Boolean isValidPostalCode(String postalCode){
+        Pattern pattern = Pattern.compile("\\b(?!(\\d)\\1{3})[13-9]{4}[1346-9][013-9]{5}\\b");
+        return postalCode.matches(pattern.pattern());
+    }
+
 }
