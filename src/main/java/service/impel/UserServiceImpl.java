@@ -14,7 +14,7 @@ public class UserServiceImpl extends BaseServiceImpl<Integer, User, UserReposito
 
   public UserServiceImpl(UserRepository userRepository){
       super(userRepository);
-      this.userRepository=userRepository;
+      this.repository=userRepository;
   }
 
 
@@ -22,7 +22,7 @@ public class UserServiceImpl extends BaseServiceImpl<Integer, User, UserReposito
 
     @Override
     public void findByUserNameAndPassword(String userName, String password) throws SQLException {
-        User user = userRepository.findByUsernameAndPassword(userName, password);
+        User user = repository.findByUsernameAndPassword(userName, password);
         if (user != null && userName.equals(user.getUserName()) && password.equals(user.getPassword())) {
             System.out.println("Successful login");
         } else {
@@ -30,6 +30,18 @@ public class UserServiceImpl extends BaseServiceImpl<Integer, User, UserReposito
         }
     }
 
+    @Override
+    public boolean rightUserName(String userName) throws SQLException {
+            repository.findByUserName(userName);
+            return userName.equals(repository.findByUserName(userName));
+
+    }
+
+    @Override
+    public boolean rightPassword(String password) throws SQLException {
+        repository.findByPassword(password);
+        return password.equals(repository.findByPassword(password));
+    }
 
 
 }
