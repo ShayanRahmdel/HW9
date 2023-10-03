@@ -13,33 +13,33 @@ public class BaseServiceImpl<ID extends Serializable,TYPE extends BaseEntity<ID>
         implements BaseService<ID,TYPE> {
 
 
-    protected R userRepository;
+    protected R repository;
 
     public BaseServiceImpl(R repository) {
-        this.userRepository = repository;
+        this.repository = repository;
     }
     @Override
     public void save(TYPE entity) throws SQLException {
-           userRepository.save(entity);
+          repository.save(entity);
     }
 
     @Override
     public List<TYPE> findAll() throws SQLException {
-        return userRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public TYPE findById(ID id) throws SQLException {
-        return userRepository.findById(id);
+        return repository.findById(id);
     }
 
     @Override
     public void update(TYPE entity) throws SQLException {
-        userRepository.update(entity);
+        repository.update(entity);
     }
 
     @Override
     public void delete(ID id) throws SQLException {
-            userRepository.delete(id);
+            repository.delete(id);
     }
 }
