@@ -13,7 +13,7 @@ public class User extends BaseEntity<Integer> {
 
     private String password;
 
-    private String address;
+    private String postalCode;
 
     public String getFirstName() {
         return firstName;
@@ -47,30 +47,30 @@ public class User extends BaseEntity<Integer> {
         this.password = password;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
 
-    public User(Integer integer, String firstName, String lastName, String userName, String password, String address) {
+    public User(Integer integer, String firstName, String lastName, String userName, String password, String postalCode) {
         super(integer);
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
-        this.address = address;
+        this.postalCode = postalCode;
     }
 
-    public User(String firstName, String lastName, String userName, String password, String address) {
+    public User(String firstName, String lastName, String userName, String password, String postalCode) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
-        this.address = address;
+        this.postalCode = postalCode;
 
     }
 
@@ -84,7 +84,7 @@ public class User extends BaseEntity<Integer> {
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", address='" + address + '\'' +
+                ", address='" + postalCode + '\'' +
                 '}';
     }
 }
