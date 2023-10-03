@@ -62,5 +62,13 @@ public class Electronic  extends BaseEntity<Integer> {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "Electronic{" +
+                "id=" + getId()+ "  "+
+                "electronicProduct=" + electronicProduct +
+                ", prize=" + prize +
+                ", stock=" + stock +
+                '}';
+    }
 }
