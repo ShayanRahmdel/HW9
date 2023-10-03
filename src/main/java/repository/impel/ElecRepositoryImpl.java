@@ -44,7 +44,7 @@ public class ElecRepositoryImpl extends BaseRepositoryImpl<Integer, Electronic> 
     @Override
     protected Electronic mapResultSetToEntity(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
-        ElectronicProduct electronicProduct = ElectronicProduct.valueOf(resultSet.getString("product"));
+        ElectronicProduct electronicProduct = ElectronicProduct.valueOf(resultSet.getString("name"));
         double prize = resultSet.getDouble("prize");
         int stock = resultSet.getInt("stock");
 
