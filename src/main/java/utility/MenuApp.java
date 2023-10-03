@@ -12,6 +12,8 @@ public class MenuApp {
 
     ApplicationContext applicationContext = new ApplicationContext();
 
+    private final SignInMenu signInMenu = new SignInMenu();
+
 
 
 
@@ -23,7 +25,7 @@ public class MenuApp {
         int select = giveIntegerInput();
         switch (select){
             case 1->signUp();
-            case 2-> System.out.println("sign in");
+            case 2-> signInMenu.signIn();
             default -> System.out.println("exit");
         }
 
