@@ -13,9 +13,18 @@ CREATE TABLE Users(
 CREATE TABLE ElectronicProducts(
     id SERIAL PRIMARY KEY ,
     name VARCHAR(10),
-    prize NUMERIC,
+    prize NUMERIC  ,
     stock INT
 );
 
 
-CREATE TYPE products AS ENUM ('CAMERA', 'TV');
+
+
+
+CREATE TABLE Orders(
+    id SERIAL PRIMARY KEY ,
+    stock INT,
+    user_id INT REFERENCES users(id),
+    elecproduct_id INT REFERENCES electronicproducts(id)
+
+);
