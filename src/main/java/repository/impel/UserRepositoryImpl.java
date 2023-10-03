@@ -81,7 +81,7 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<Integer, User> implem
 
     @Override
     public String findByUserName(String userName) throws SQLException {
-        String sql = "SELECT userName FROM user_app WHERE username=?";
+        String sql = "SELECT userName FROM "+ getTableName()+ " WHERE username=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, userName);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -91,4 +91,18 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<Integer, User> implem
             return null;
         }
     }
+
+    @Override
+    public String findByPassword(String password) throws SQLException {
+            String sql = "SELECT password FROM "+ getTableName()+" WHERE password=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("password");
+            } else {
+                return null;
+            }
+        }
+
 }
