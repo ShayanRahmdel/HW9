@@ -65,13 +65,15 @@ public class ProductRpositoryImpl extends BaseRepositoryImpl<Integer, Product> i
 
     @Override
     public int checkStock(int id) throws SQLException {
-        String sql="SELECT stock FROM " + getTableName() + " where id=?";
+        String sql="SELECT stock FROM " + getTableName() + " where id=? ";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1,id);
         ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        int result = resultSet.getInt(1);
-        return result;
+        if (resultSet.next()) {
+            return resultSet.getInt("stock");
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -88,5 +90,19 @@ public class ProductRpositoryImpl extends BaseRepositoryImpl<Integer, Product> i
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1,id);
         preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public int checkID(int id) throws SQLException {
+        String sql = "SELECT id FROM "+ getTableName()+" WHERE id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1,id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getInt("id");
+        } else {
+            return 0;
+        }
+
     }
 }
