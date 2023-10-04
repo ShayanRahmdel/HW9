@@ -121,6 +121,8 @@ public class ProductMenu {
         System.out.println("enter your ID");
         int id = giveIntegerInput();
         applicationContext.getOrderService().printCart(id);
+        applicationContext.getOrderService().printTotalPrice(id);
+        System.out.println();
     }
 
 
