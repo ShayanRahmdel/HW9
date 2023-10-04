@@ -7,27 +7,36 @@ public class Order extends BaseEntity<Integer> {
 
     private int userID;
 
-    private int elecProduct_ID;
+    private String productName;
 
-    private int shoeProduct_ID;
+    private int productID;
 
-    public Order(Integer integer, int userID, int elecProduct_ID, int shoeProduct_ID) {
-        super(integer);
-        this.userID = userID;
-        this.elecProduct_ID = elecProduct_ID;
-        this.shoeProduct_ID = shoeProduct_ID;
+    private double totalPrice;
+
+    public Order(Integer integer,String productName, int stock,double totalPrice) {
+        super();
+        this.productName = productName;
+        this.totalPrice = totalPrice;
+        this.stock = stock;
     }
 
-    public Order( int userID, int elecProduct_ID, int shoeProduct_ID) {
+    private int stock;
 
-        this.userID = userID;
-        this.elecProduct_ID = elecProduct_ID;
-        this.shoeProduct_ID = shoeProduct_ID;
+    public int getStock() {
+        return stock;
     }
 
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 
+    public double getTotalPrice() {
+        return totalPrice;
+    }
 
-
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public int getUserID() {
         return userID;
@@ -37,19 +46,56 @@ public class Order extends BaseEntity<Integer> {
         this.userID = userID;
     }
 
-    public int getElecProduct_ID() {
-        return elecProduct_ID;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setElecProduct_ID(int elecProduct_ID) {
-        this.elecProduct_ID = elecProduct_ID;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public int getShoeProduct_ID() {
-        return shoeProduct_ID;
+    public int getProductID() {
+        return productID;
     }
 
-    public void setShoeProduct_ID(int shoeProduct_ID) {
-        this.shoeProduct_ID = shoeProduct_ID;
+    public void setProductID(int productID) {
+        this.productID = productID;
+    }
+
+
+    public Order(Integer integer, int userID, int productID) {
+        super(integer);
+        this.userID = userID;
+        this.productID = productID;
+
+    }
+
+    public Order(int userID, int productID) {
+        this.userID = userID;
+        this.productID = productID;
+
+    }
+
+    public Order(Integer integer, int userID, String productName) {
+        super(integer);
+        this.userID = userID;
+        this.productName = productName;
+
+    }
+
+    public Order(int userID, String productName) {
+        this.userID = userID;
+        this.productName = productName;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id="+ getId()+" "+
+                "productName='" + productName + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", stock=" + stock +
+                '}';
     }
 }
