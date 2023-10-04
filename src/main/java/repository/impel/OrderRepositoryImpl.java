@@ -103,5 +103,20 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl<Integer, Order> impl
         return cart;
     }
 
+    @Override
+    public int totalPrice(int id) throws SQLException {
+        String sql = "SELECT sum(price) FROM  product\n" +
+                "join orders o on Product.id = o.product_id\n" +
+                "where user_id=?;";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getInt("sum");
+        } else {
+            return 0;
+        }
+    }
+
 
 }

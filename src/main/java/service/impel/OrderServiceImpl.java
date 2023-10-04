@@ -14,7 +14,6 @@ public class OrderServiceImpl extends BaseServiceImpl<Integer, Order, OrderRepos
     }
 
 
-
     @Override
     public void setNull(int productID) throws SQLException {
 
@@ -27,7 +26,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Integer, Order, OrderRepos
 
     @Override
     public boolean findProductId(int id) throws SQLException {
-        return id==repository.findProductID(id);
+        return id == repository.findProductID(id);
     }
 
     @Override
@@ -35,5 +34,11 @@ public class OrderServiceImpl extends BaseServiceImpl<Integer, Order, OrderRepos
         List<Order> cart = repository.printUserCart(id);
         System.out.println(cart);
 
+    }
+
+    @Override
+    public void printTotalPrice(int id) throws SQLException {
+        System.out.print("=========================Your total cart is ");
+        System.out.println(repository.totalPrice(id));
     }
 }

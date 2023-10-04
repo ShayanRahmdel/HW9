@@ -16,4 +16,7 @@ public interface OrderRepository extends BaseRepository<Integer, Order> {
     int findProductID(int id) throws SQLException;
 
     List<Order> printUserCart(int id) throws SQLException;
+
+
+    int totalPrice(int id) throws SQLException;
 }

@@ -17,4 +17,6 @@ public interface OrderService extends BaseService<Integer, Order> {
     boolean findProductId(int id) throws SQLException;
 
     void printCart(int id) throws SQLException;
+
+    void printTotalPrice(int id) throws SQLException;
 }
