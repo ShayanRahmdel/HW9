@@ -46,5 +46,10 @@ public class UserServiceImpl extends BaseServiceImpl<Integer, User, UserReposito
 
     }
 
+    @Override
+    public int findIDByUserName(String userName) throws SQLException {
+        return repository.findIDByUserName(userName);
+    }
+
 
 }
