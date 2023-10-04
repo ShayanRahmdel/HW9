@@ -13,4 +13,6 @@ public interface UserService extends BaseService<Integer, User> {
      boolean rightUserName(String userName) throws SQLException;
 
      boolean rightPassword(String password) throws SQLException;
+
+     boolean findUserId(int id) throws SQLException;
 }

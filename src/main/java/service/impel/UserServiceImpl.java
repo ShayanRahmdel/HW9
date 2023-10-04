@@ -11,13 +11,10 @@ public class UserServiceImpl extends BaseServiceImpl<Integer, User, UserReposito
         implements UserService {
 
 
-
-  public UserServiceImpl(UserRepository userRepository){
-      super(userRepository);
-      this.repository=userRepository;
-  }
-
-
+    public UserServiceImpl(UserRepository userRepository) {
+        super(userRepository);
+        this.repository = userRepository;
+    }
 
 
     @Override
@@ -32,8 +29,8 @@ public class UserServiceImpl extends BaseServiceImpl<Integer, User, UserReposito
 
     @Override
     public boolean rightUserName(String userName) throws SQLException {
-            repository.findByUserName(userName);
-            return userName.equals(repository.findByUserName(userName));
+        repository.findByUserName(userName);
+        return userName.equals(repository.findByUserName(userName));
 
     }
 
@@ -41,6 +38,12 @@ public class UserServiceImpl extends BaseServiceImpl<Integer, User, UserReposito
     public boolean rightPassword(String password) throws SQLException {
         repository.findByPassword(password);
         return password.equals(repository.findByPassword(password));
+    }
+
+    @Override
+    public boolean findUserId(int id) throws SQLException {
+        return id == repository.findUserID(id);
+
     }
 
 
