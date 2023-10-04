@@ -118,5 +118,18 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<Integer, User> implem
             }
         }
 
+    @Override
+    public int findIDByUserName(String userName) throws SQLException {
+        String sql = "SELECT id FROM users WHERE username=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, userName);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getInt("id");
+        } else {
+            return 0;
+        }
+    }
+
 
 }
