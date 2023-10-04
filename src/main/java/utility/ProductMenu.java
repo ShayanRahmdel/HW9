@@ -20,6 +20,7 @@ public class ProductMenu {
             System.out.println("2_add the Product in your Cart");
             System.out.println("3_remove the Product from your Cart");
             System.out.println("4_See Your Cart");
+            System.out.println("5_back to user menu");
             int select = giveIntegerInput();
             switch (select) {
                 case 1 -> loadProduct();
@@ -73,8 +74,10 @@ public class ProductMenu {
         boolean flag = true;
         while (flag) {
             productID = giveIntegerInput();
-            if (applicationContext.getProductService().checkStock(productID) == 0) {
-                System.out.println("we dont have this item antmore ");
+
+            if (applicationContext.getProductService().checkStock(productID) == 0
+                    && !applicationContext.getProductService().checkId(productID)) {
+                System.out.println("we dont have this item antmore or Your id is wrong  ");
             } else flag = false;
         }
         return productID;
@@ -94,7 +97,7 @@ public class ProductMenu {
     }
 
     private void removeProduct() throws SQLException {
-        System.out.print("Enter id Product: ");
+        System.out.print("Enter id Order: ");
         int productID = checkProdutID();
         applicationContext.getOrderService().deleteByProductID(productID);
         applicationContext.getProductService().increase(productID);
