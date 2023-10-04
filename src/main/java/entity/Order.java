@@ -11,12 +11,12 @@ public class Order extends BaseEntity<Integer> {
 
     private int productID;
 
-    private double totalPrice;
+    private double Price;
 
     public Order(Integer integer,String productName, int stock,double totalPrice) {
         super();
         this.productName = productName;
-        this.totalPrice = totalPrice;
+        this.Price = totalPrice;
         this.stock = stock;
     }
 
@@ -30,12 +30,12 @@ public class Order extends BaseEntity<Integer> {
         this.stock = stock;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public double getPrice() {
+        return Price;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setPrice(double price) {
+        this.Price = price;
     }
 
     public int getUserID() {
@@ -94,7 +94,7 @@ public class Order extends BaseEntity<Integer> {
         return "Order{" +
                 "id="+ getId()+" "+
                 "productName='" + productName + '\'' +
-                ", totalPrice=" + totalPrice +
+                ", Price=" + Price +
                 ", stock=" + stock +
                 '}';
     }
