@@ -12,9 +12,11 @@ import java.sql.SQLException;
 
 public class ElecRepositoryImpl extends BaseRepositoryImpl<Integer, Electronic> implements ElecRepository {
 
+    private Connection connection;
 
-    public ElecRepositoryImpl(Connection connection){
+    public ElecRepositoryImpl(Connection connection) {
         super(connection);
+        this.connection = connection;
     }
 
 
@@ -35,9 +37,9 @@ public class ElecRepositoryImpl extends BaseRepositoryImpl<Integer, Electronic> 
 
     @Override
     protected void fillParamForStatement(PreparedStatement preparedStatement, Electronic entity, boolean b) throws SQLException {
-        preparedStatement.setString(1,entity.getElectronicProduct().getName());
-        preparedStatement.setDouble(2,entity.getPrize());
-        preparedStatement.setInt(3,entity.getStock());
+        preparedStatement.setString(1, entity.getElectronicProduct().getName());
+        preparedStatement.setDouble(2, entity.getPrize());
+        preparedStatement.setInt(3, entity.getStock());
 
     }
 
@@ -55,4 +57,28 @@ public class ElecRepositoryImpl extends BaseRepositoryImpl<Integer, Electronic> 
     protected String getUpdateQueryParams() {
         return "(name=?,prize=?,stock=?)";
     }
+
+    @Override
+    public int decreaseItem(int id) throws SQLException {
+        String sql = "UPDATE " + getTableName() + " SET stock = stock-1 WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        int result = preparedStatement.executeUpdate();
+        return result;
+    }
+
+    @Override
+    public int checkStock(int id) throws SQLException {
+        String sql = "SELECT stock FROM " + getTableName() + " WHERE id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getInt("stock");
+        } else {
+            return 0;
+        }
+
+    }
+
 }
