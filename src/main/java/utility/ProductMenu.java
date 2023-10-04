@@ -1,9 +1,7 @@
 package utility;
 
-import entity.Electronic;
-import entity.ElectronicProduct;
 import entity.Order;
-import entity.Shoe;
+import entity.Product;
 
 import java.sql.SQLException;
 import java.util.InputMismatchException;
@@ -16,15 +14,24 @@ public class ProductMenu {
 
 
     public void StoreMenu() throws SQLException {
-        System.out.println("1_Look All Product");
-        System.out.println("2_order the Product");
-        System.out.println("3_See Your Cart");
-        int select = giveIntegerInput();
-        switch (select) {
-            case 1 -> loadProduct();
-            case 2 -> orderProduct();
-            default -> System.out.println("sdasd");
+        boolean flag = true;
+        while (flag){
+            System.out.println("1_Look All Product");
+            System.out.println("2_add the Product in your Cart");
+            System.out.println("3_remove the Product from your Cart");
+            System.out.println("4_See Your Cart");
+            int select = giveIntegerInput();
+            switch (select) {
+                case 1 -> loadProduct();
+                case 2 -> orderProduct();
+                case 3 -> removeProduct();
+                case 4 -> showCart();
+                case 5 -> flag = false;
+                default -> System.out.println("enter valid number");
+            }
+
         }
+
 
     }
 
@@ -43,63 +50,75 @@ public class ProductMenu {
     }
 
     private void loadProduct() throws SQLException {
-        System.out.println("================ Electronic Items ==================");
-        List<Electronic> items = applicationContext.getElectronicService().findAll();
+        System.out.println("================  Items ==================");
+        List<Product> items = applicationContext.getProductService().findAll();
         System.out.println(items);
         System.out.println();
-        System.out.println("================Shoes Items ======================");
-        List<Shoe> shoes = applicationContext.getShoeService().findAll();
-        System.out.println(shoes);
+
     }
 
     private void orderProduct() throws SQLException {
-        System.out.print("Enter user id: ");
-        int userId = chechUserID();
-
-        System.out.print("Enter Electronic id: ");
-        int elecID = checkElectronicStock();
-        System.out.print("Enter Shoe id ");
-        int shoeID = checkShoesStock();
-
-        Order order = new Order(userId, elecID, shoeID);
-        applicationContext.getShoeService().decreaseItem(shoeID);
-        applicationContext.getElectronicService().decreaseItem(elecID);
+        System.out.print("Enter userName: ");
+        String userName = validUserName();
+        int userId = applicationContext.getUserService().findIDByUserName(userName);
+        System.out.print("Enter product id: ");
+        int produtId = checkStockItem();
+        Order order = new Order(userId, produtId);
         applicationContext.getOrderService().save(order);
+        applicationContext.getProductService().decrease(produtId);
     }
 
-    private int chechUserID() throws SQLException {
-        int userId = 0;
+    private int checkStockItem() throws SQLException {
+        int productID = 0;
         boolean flag = true;
         while (flag) {
-            userId = giveIntegerInput();
-            if (applicationContext.getUserService().findUserId(userId)) {
+            productID = giveIntegerInput();
+            if (applicationContext.getProductService().checkStock(productID) == 0) {
+                System.out.println("we dont have this item antmore ");
+            } else flag = false;
+        }
+        return productID;
+    }
+
+
+    private String validUserName() throws SQLException {
+        String userName = " ";
+        boolean flag = true;
+        while (flag) {
+            userName = input.next();
+            if (applicationContext.getUserService().rightUserName(userName)) {
                 flag = false;
-            } else System.out.println("Your ID is wrong please try again");
+            } else System.out.println("your user is incorrect");
         }
-        return userId;
+        return userName;
     }
 
-    private int checkShoesStock() throws SQLException {
-        int shoeID = 0;
-        boolean flag = true;
-        while (flag) {
-            shoeID = giveIntegerInput();
-            if (applicationContext.getShoeService().checkStock(shoeID)) {
-                System.out.println("Your stock is empty");
-            } else flag = false;
-        }
-        return shoeID;
+    private void removeProduct() throws SQLException {
+        System.out.print("Enter id Product: ");
+        int productID = checkProdutID();
+        applicationContext.getOrderService().deleteByProductID(productID);
+        applicationContext.getProductService().increase(productID);
+
     }
 
-    private int checkElectronicStock() throws SQLException {
-        int elecID = 0;
+    private int checkProdutID() throws SQLException {
+        int productID=0;
         boolean flag = true;
-        while (flag) {
-            elecID = giveIntegerInput();
-            if (applicationContext.getElectronicService().checkStock(elecID)) {
-                System.out.println("Your stock is empty");
-            } else flag = false;
+        while (flag){
+             productID = giveIntegerInput();
+            if (applicationContext.getOrderService().findProductId(productID)){
+                System.out.println("enter right ID");
+
+            }else flag=false;
         }
-        return elecID;
+        return productID;
     }
+
+    private void showCart() throws SQLException {
+        System.out.println("enter your ID");
+        int id = giveIntegerInput();
+        applicationContext.getOrderService().printCart(id);
+    }
+
+
 }
