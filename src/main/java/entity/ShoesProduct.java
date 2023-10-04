@@ -8,8 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public enum ShoesProduct {
-    AIRzoom(200),Adizero(190),EvoSpeed(170),TabrizShoes(150),MashadShoes(160);
 
+    sport("sport"),
+    formal("formal");
 
-    private double prize;
+    private String name;
 }
