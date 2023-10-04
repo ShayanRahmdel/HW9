@@ -21,6 +21,8 @@ public abstract class  BaseRepositoryImpl<ID extends Serializable,TYPE extends B
         PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         fillParamForStatement(preparedStatement, entity, false);
         preparedStatement.executeUpdate();
+
+
     }
 
 
