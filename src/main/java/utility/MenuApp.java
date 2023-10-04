@@ -18,16 +18,21 @@ public class MenuApp {
 
 
     public void menu() throws SQLException {
-        System.out.println("Welcome to online store");
-        System.out.println("1_sign up");
-        System.out.println("2_sign in");
-        System.out.println("3_exit");
-        int select = giveIntegerInput();
-        switch (select){
-            case 1->signUp();
-            case 2-> signInMenu.signIn();
-            default -> System.out.println("exit");
+        boolean flag =true;
+        while (flag){
+            System.out.println("Welcome to online store");
+            System.out.println("1_sign up");
+            System.out.println("2_sign in");
+            System.out.println("3_exit");
+            int select = giveIntegerInput();
+            switch (select){
+                case 1->signUp();
+                case 2-> signInMenu.signIn();
+                case 3-> flag=false;
+            }
+
         }
+
 
     }
 
