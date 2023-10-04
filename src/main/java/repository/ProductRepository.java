@@ -14,4 +14,6 @@ public interface ProductRepository extends BaseRepository<Integer, Product> {
     void decrease(int id) throws SQLException;
 
     void increase(int id) throws SQLException;
+
+    int checkID(int id) throws SQLException;
 }
