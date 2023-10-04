@@ -13,4 +13,10 @@ public interface UserRepository extends BaseRepository<Integer, User> {
     String findByPassword(String password) throws SQLException;
 
     int findUserID(int id) throws SQLException;
+
+    int findIDByUserName(String userName) throws SQLException;
+
+
+
+
 }
