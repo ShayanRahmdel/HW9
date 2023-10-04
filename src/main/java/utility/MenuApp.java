@@ -28,7 +28,9 @@ public class MenuApp {
             switch (select){
                 case 1->signUp();
                 case 2-> signInMenu.signIn();
-                case 3-> flag=false;
+                case 3-> {
+                    System.out.println("Bye");
+                    flag=false;}
             }
 
         }
