@@ -1,20 +1,16 @@
 package utility;
 
-import repository.ElecRepository;
 import repository.OrderRepository;
-import repository.ShoeRepository;
+import repository.ProductRepository;
 import repository.UserRepository;
-import repository.impel.ElecRepositoryImpl;
 import repository.impel.OrderRepositoryImpl;
-import repository.impel.ShoeRepositoryImpl;
+import repository.impel.ProductRpositoryImpl;
 import repository.impel.UserRepositoryImpl;
-import service.ElectronicService;
 import service.OrderService;
-import service.ShoeService;
+import service.ProductService;
 import service.UserService;
-import service.impel.ElectronicServiceImpl;
 import service.impel.OrderServiceImpl;
-import service.impel.ShoeServiceImpl;
+import service.impel.ProductServiceImpl;
 import service.impel.UserServiceImpl;
 
 public class ApplicationContext {
@@ -22,13 +18,10 @@ public class ApplicationContext {
     private UserRepository userRepository;
     private UserService userService;
 
-    private ElecRepository elecRepository;
+    private ProductRepository productRepository;
 
-    private ElectronicService electronicService;
+    private ProductService productService;
 
-    private ShoeRepository shoeRepository;
-
-    private ShoeService shoeService;
 
     private OrderRepository orderRepository;
 
@@ -59,42 +52,7 @@ public class ApplicationContext {
         return userService;
     }
 
-    public ElecRepository getElecRepository() {
-        if (elecRepository == null) {
-            elecRepository = new ElecRepositoryImpl(
-                    DataSource.getConnection()
-            );
-        }
-        return elecRepository;
-    }
 
-
-    public ElectronicService getElectronicService() {
-        if (electronicService == null) {
-            electronicService = new ElectronicServiceImpl(
-                    getElecRepository()
-            );
-        }
-        return electronicService;
-    }
-
-    public ShoeRepository getShoeRepository() {
-        if (shoeRepository == null) {
-            shoeRepository = new ShoeRepositoryImpl(
-                    DataSource.getConnection()
-            );
-        }
-        return shoeRepository;
-    }
-
-    public ShoeService getShoeService() {
-        if (shoeService == null) {
-            shoeService = new ShoeServiceImpl(
-                    getShoeRepository()
-            );
-        }
-        return shoeService;
-    }
 
 
     public OrderRepository  getOrderRepository() {
@@ -114,4 +72,24 @@ public class ApplicationContext {
         }
         return orderService;
     }
+
+    public ProductRepository  getProductRepository() {
+        if (productRepository == null) {
+            productRepository = new ProductRpositoryImpl(
+                    DataSource.getConnection()
+            );
+        }
+        return productRepository;
+    }
+
+    public ProductService getProductService() {
+        if (productService == null) {
+            productService = new ProductServiceImpl(
+                    getProductRepository()
+            );
+        }
+        return productService;
+    }
+
+
 }
