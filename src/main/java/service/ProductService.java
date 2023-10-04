@@ -13,4 +13,6 @@ public interface ProductService extends BaseService<Integer, Product> {
     void decrease(int id) throws SQLException;
 
     void increase(int id) throws SQLException;
+
+    boolean checkId(int id) throws SQLException;
 }

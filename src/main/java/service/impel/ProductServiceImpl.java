@@ -10,9 +10,10 @@ import java.util.List;
 
 public class ProductServiceImpl extends BaseServiceImpl<Integer, Product, ProductRepository> implements ProductService {
     private ProductRepository productRepository;
+
     public ProductServiceImpl(ProductRepository repository) {
         super(repository);
-        this.productRepository=repository;
+        this.productRepository = repository;
     }
 
 
@@ -30,6 +31,11 @@ public class ProductServiceImpl extends BaseServiceImpl<Integer, Product, Produc
     @Override
     public void increase(int id) throws SQLException {
         repository.increase(id);
+    }
+
+    @Override
+    public boolean checkId(int id) throws SQLException {
+        return id==repository.checkID(id);
     }
 
 
